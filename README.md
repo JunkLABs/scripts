@@ -1,4 +1,4 @@
-scripts
+Scripts
 =======
 
-Dumping ground for my scripts.
+Dumping ground for my personal and work scripts.
