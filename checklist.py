@@ -1,10 +1,11 @@
 '''
 checklist.py
+Copyright 2013 Wohlfe 
+Licensed under the Apache License v2
 
 This script takes a directory path as an argument, searches it recursively, and outputs the files in a PlainTasks 
-checklist, except for folder and files that start with a period. If I can ever figure out the magic of encoding 
-I'll add the checkbox, but for now it uses a *. Yes this requires Python 3. If you can't use 3 just change the print 
-functions, but you really should be using 3.
+checklist, except for folder and files that start with a period. Windows can't handle outputting checkboxes, so for now it uses a *. 
+Yes this requires Python 3. If you can't use 3 just change the print functions, but you really should be using 3.
 '''
 
 import os, sys, locale
@@ -25,8 +26,11 @@ def checklist(rootdir):
 
     for root, subFolders, files in os.walk(rootdir):
         with open(outfileName, 'w') as fileOut:
-            fileOut.write("Replace the * with checkboxes. Remember, the script excludes folders \
-                            and files that start with a period. \n")
+            if sys.platform.startswith('windows'):
+                fileOut.write("Replace the * with checkboxes. Remember, the script excludes folders \
+                                and files that start with a period. \n")
+            else:
+                fileOut.write("Remember, the script excludes folders and files that start with a period. \n")
 
             for folder in subFolders:
                 if folder.find('.') != -1 or root.find('.') != -1: #Checks if the folder name has a period, drops it if so.
@@ -43,7 +47,11 @@ def checklist(rootdir):
 
             for filename in filenames:
                 short_filename = filename[len(rootdir):] #Shortens the output, don't need the entire directory on every line.
-                fileOut.write(chr(9744) + " %s \n" % short_filename) #If everything check out, this writes it to the file.
+
+                if sys.platform.startswith('windows'):
+                    fileOut.write("*" + " %s \n" % short_filename) #If everything check out, this writes it to the file with a * instead of a checkbox.
+                else:
+                    fileOut.write(chr(9744) + " %s \n" % short_filename) #If everything check out, this writes it to the file with a checkbox.
 
     print("Completed. The output file is %s" % outfileName) #Python 2 = print "Completed. The output file is " + outfileName
 
