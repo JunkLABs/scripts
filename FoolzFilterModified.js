@@ -6,7 +6,7 @@
 // @version         1.1
 // @namespace       Foolz
 // @author          Wohlfe
-// @downloadURL     https://github.com/wohlfe/scripts/FoolzFilterModified.js
+// @downloadURL     https://github.com/Wohlfe/scripts/blob/master/FoolzFilterModified.js
 // @run-at          document-end
 // @match           *://*.foolz.us*
 // ==/UserScript==
@@ -52,7 +52,6 @@
 				var trip = post.getElementsByClassName('post_tripcode');
 				//This uses case-insensitive global regex to identify the username anywhere in the post_author field, this is extreme so it's commented out, only use it if necessary.
 				//var regex = new RegExp('\\{'name'\\}', 'gi');
-				
 
 				// Checks name, regex of name, or trip
 				if ((name && isFiltered('name', name[0].textContent)) || (regex == true && isFiltered('name', name[0].textContent)) || (typeof trip[0] !== 'undefined' && isFiltered('trip', trip[0].textContent)))
