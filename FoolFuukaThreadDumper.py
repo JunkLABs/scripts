@@ -28,8 +28,8 @@ if sys.version_info < (3, 0): #Checks the Python version
     raise "You have to use Python 3 or change the script." 
 
 try:
-    board = sys.argv[1].rstrip().lower() #Expects a board, strips whitespace from it, makes it lowercase.
-    thread = sys.argv[2].rstrip() #Expects a thread, strips whitespace from it.
+    board_arg = sys.argv[1].rstrip().lower() #Expects a board, strips whitespace from it, makes it lowercase.
+    thread_arg = sys.argv[2].rstrip() #Expects a thread, strips whitespace from it.
 
     if board.startswith('/') or board.endswith('/'): #Checks if someone didn't follow the god damn directions and put slashes in the board name
         board = board.replace('/', '') #Replaces them shits
@@ -42,5 +42,5 @@ except IndexError:
     sys.exit("You fucked up the syntax:", err)
 
 def ThreadDump(board, thread):
-    URI = ''.join('http://archive.foolz.us/_/api/chan/thread?board=', board, 'thread=', thread)
-    request = requests.get(URI)
+	payload = {'board': 'board_arg', 'thread': 'thread_arg'}
+    request = requests.get('http://archive.foolz.us/_/api/chan/thread', params=payload)
