@@ -8,7 +8,7 @@
 // @author          Wohlfe
 // @downloadURL     https://github.com/Wohlfe/scripts/blob/master/FoolzFilterModified.js
 // @run-at          document-end
-// @match           *://*.foolz.us*
+// @match           *://*.foolz.us/*
 // ==/UserScript==
 
 //Fair warning: Like any script, this will slow down your browser. Also my JS is rusty so this might fuck your shit up.
